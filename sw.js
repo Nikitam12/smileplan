@@ -1,6 +1,6 @@
 // SmilePlan service worker.
 // При изменении любого файла из SHELL увеличьте номер в CACHE.
-const CACHE = 'smileplan-v8';
+const CACHE = 'smileplan-v13';
 const SHELL = [
   '/smileplan/',
   '/smileplan/index.html',
