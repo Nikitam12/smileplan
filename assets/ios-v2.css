@@ -1,0 +1,624 @@
+/* SmilePlan — iOS-слой поверх собранного Tailwind-CSS.
+   Подключается после index-DQE2z3t7.css и только переопределяет стили. */
+
+:root {
+  --ios-blue: #007aff;
+  --ios-blue-dark: #0062cc;
+  --ios-red: #ff3b30;
+  --ios-bg: #f2f2f7;
+  --ios-fill: #f2f2f7;
+  --ios-sep: rgba(60, 60, 67, 0.29);
+  --ios-label-2: #6b6b70;
+  --ios-ring: rgba(0, 122, 255, 0.45);
+}
+
+/* ---------- Типографика: системный SF на Apple, системный шрифт на остальных ---------- */
+html,
+body,
+#root,
+button,
+input,
+select,
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, system-ui, sans-serif;
+}
+
+body {
+  background: var(--ios-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2 {
+  letter-spacing: -0.02em;
+}
+
+td,
+th,
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Единый iOS-синий вместо трёх разных ---------- */
+.bg-brand-600,
+.btn-primary {
+  background-color: var(--ios-blue);
+}
+.btn-primary:hover,
+.hover\:bg-brand-700:hover {
+  background-color: #0a6fe0;
+}
+.text-brand-600,
+.hover\:text-brand-600:hover {
+  color: var(--ios-blue-dark);
+}
+.text-brand-700 {
+  color: var(--ios-blue-dark);
+}
+.text-brand-400 {
+  color: var(--ios-blue);
+}
+.border-brand-600 {
+  border-color: var(--ios-blue);
+}
+.border-brand-400,
+.border-brand-300 {
+  border-color: #7ab8ff;
+}
+.border-brand-100 {
+  border-color: #d6e8ff;
+}
+.bg-brand-50,
+.hover\:bg-brand-50:hover {
+  background-color: #eef6ff;
+}
+.bg-brand-100 {
+  background-color: #dcebff;
+}
+.bg-brand-300 {
+  background-color: #7ab8ff;
+}
+.from-brand-50 {
+  --tw-gradient-from: #eef6ff var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(238 246 255 / 0) var(--tw-gradient-to-position);
+}
+.accent-brand-600 {
+  accent-color: var(--ios-blue);
+}
+.focus\:ring-brand-400:focus {
+  --tw-ring-color: var(--ios-ring);
+}
+
+/* Контраст вторичного текста (был ≈2.6:1, стало ≥4.5:1) */
+.text-slate-400 {
+  color: var(--ios-label-2);
+}
+.text-slate-300 {
+  color: #8a8a90;
+}
+::placeholder {
+  color: #737378;
+  opacity: 1;
+}
+
+/* ---------- Фон приложения и «inset grouped»-карточки ---------- */
+.bg-slate-50.sp-shell,
+.sp-shell {
+  background-color: var(--ios-bg);
+}
+.card {
+  border-width: 0;
+  border-radius: 14px;
+  box-shadow: none;
+}
+.rounded-2xl {
+  border-radius: 14px;
+}
+.rounded-xl {
+  border-radius: 12px;
+}
+
+/* ---------- Кнопки ---------- */
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  justify-content: center;
+  min-height: 36px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition-property: background-color, color, opacity, transform;
+}
+.btn-primary:active,
+.btn-secondary:active,
+.btn-danger:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+}
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-danger:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+/* «Tinted» — как вторичные кнопки в iOS */
+.btn-secondary {
+  background-color: rgba(0, 122, 255, 0.12);
+  border-color: transparent;
+  color: var(--ios-blue-dark);
+}
+.btn-secondary:hover {
+  background-color: rgba(0, 122, 255, 0.18);
+}
+.btn-danger {
+  background-color: rgba(255, 59, 48, 0.1);
+  border-color: transparent;
+  color: #d70015;
+}
+.btn-danger:hover {
+  background-color: rgba(255, 59, 48, 0.16);
+}
+
+/* ---------- Поля ввода ---------- */
+.input {
+  min-height: 44px;
+  border-radius: 10px;
+  border-color: transparent;
+  background-color: var(--ios-fill);
+  font-size: 16px; /* iOS Safari не зумит страницу при фокусе */
+}
+.input:focus {
+  background-color: #fff;
+  --tw-ring-color: var(--ios-ring);
+}
+textarea.input {
+  min-height: 88px;
+}
+.label {
+  color: var(--ios-label-2);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ---------- Фокус с клавиатуры ---------- */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--ios-ring);
+  outline-offset: 2px;
+}
+
+/* ---------- Боковая панель (десктоп) ---------- */
+.sp-aside {
+  background-color: rgba(255, 255, 255, 0.88);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-right: 0.5px solid var(--ios-sep);
+}
+.sp-shell {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* ---------- Модальные окна: на телефоне — нижний лист (sheet) ---------- */
+@media (max-width: 639px) {
+  .fixed.inset-0.items-center {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .fixed.inset-0.items-center > div {
+    width: 100%;
+    max-width: none;
+    max-height: 92vh;
+    max-height: 92dvh;
+    border-radius: 20px 20px 0 0;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* ---------- Карта зубов: прокрутка вместо обрезания ---------- */
+/* Зубы масштабируются под ширину карточки; прокрутка — только если места совсем нет */
+.sp-chart {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 12px;
+  border-radius: 14px;
+  background-color: var(--ios-bg);
+}
+.sp-teeth-row {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
+  min-width: 304px; /* 16 зубов × 19px */
+}
+.sp-teeth-row > div {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 44px;
+}
+.sp-teeth-row > div > div {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 7 / 8;
+}
+.sp-teeth-row svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* средняя линия между правой и левой половиной челюсти */
+.sp-teeth-row > div:nth-child(9) {
+  margin-left: 10px;
+  position: relative;
+}
+.sp-teeth-row > div:nth-child(9)::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 0;
+  bottom: 0;
+  border-left: 1px dashed rgba(60, 60, 67, 0.2);
+}
+.sp-teeth-row .text-\[9px\] {
+  font-size: 10px;
+}
+/* карточка с картой зубов занимает всю ширину, список процедур — ниже */
+@media (min-width: 1024px) {
+  .sp-chart-card,
+  .sp-chart-card ~ .card {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 767px) {
+  .sp-chart-card {
+    padding: 14px 10px;
+  }
+  .sp-chart {
+    padding: 12px 6px;
+  }
+  .sp-teeth-row {
+    min-width: 0;
+    gap: 1px;
+  }
+  .sp-teeth-row > div:nth-child(9) {
+    margin-left: 6px;
+  }
+  .sp-teeth-row > div:nth-child(9)::before {
+    left: -4px;
+  }
+  .sp-teeth-row .text-\[9px\] {
+    font-size: 9px;
+  }
+}
+
+/* ---------- Мобильная раскладка: нижний tab bar как в iOS ---------- */
+@media (max-width: 767px) {
+  .sp-shell {
+    flex-direction: column;
+  }
+  .sp-main {
+    order: 1;
+    min-height: 0;
+  }
+  .sp-main .sp-page {
+    padding: 16px;
+    padding-bottom: 24px;
+  }
+  /* группы кнопок в шапке карточки не должны выталкивать страницу вширь */
+  .sp-main .sp-page .shrink-0.flex-wrap {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  .sp-main .sp-page .grid-cols-2 .text-2xl {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+  /* календарь использует отрицательные поля под старый отступ */
+  .sp-main .sp-page > .\-mx-6 {
+    margin: -16px;
+  }
+
+  .sp-shell > .sp-aside {
+    order: 2;
+    width: 100%;
+    flex-direction: row;
+    flex-shrink: 0;
+    border-right: 0;
+    border-top: 0.5px solid var(--ios-sep);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .sp-aside .sp-brand,
+  .sp-aside .sp-test,
+  .sp-aside .sp-toggle {
+    display: none;
+  }
+  .sp-aside .sp-nav {
+    flex-direction: row;
+    flex: 1;
+    gap: 0;
+    padding: 0;
+    justify-content: space-around;
+    align-items: stretch;
+  }
+  .sp-aside .sp-nav a {
+    flex: 1;
+    min-width: 0;
+    min-height: 52px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 2px;
+    border-radius: 0;
+    background: transparent;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 500;
+  }
+  .sp-aside .sp-nav a.bg-brand-50 {
+    background: transparent;
+    color: var(--ios-blue);
+  }
+  .sp-aside .sp-nav-label {
+    max-width: 100%;
+  }
+}
+
+/* ---------- Сенсорные устройства: цели касания ≥ 44px ---------- */
+@media (pointer: coarse) {
+  button,
+  select,
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    min-height: 44px;
+  }
+  button[aria-label] {
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ---------- Пользователи, которым нужно меньше анимации ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================================================================
+   v2 — оптимизация под телефон и ПК
+   ===================================================================== */
+
+/* ---------- Общее поведение на сенсорных экранах ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+a,
+button,
+select,
+summary,
+[role="button"] {
+  touch-action: manipulation; /* без задержки и двойного тапа-зума */
+  -webkit-tap-highlight-color: transparent;
+}
+.sp-main {
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Скрыть полосы прокрутки у горизонтальных лент (вкладки, чипсы) */
+.sp-page .flex.border-b.overflow-x-auto,
+.sp-chips {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sp-page .flex.border-b.overflow-x-auto::-webkit-scrollbar,
+.sp-chips::-webkit-scrollbar {
+  display: none;
+}
+.sp-page .flex.border-b.overflow-x-auto > button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Суммы и цены в таблицах не переносим по строкам */
+.sp-page table td.text-right,
+.sp-page table th.text-right {
+  white-space: nowrap;
+}
+
+/* ---------- Календарь ---------- */
+/* Колонка времени и шапка дней «прилипают» при горизонтальной/вертикальной прокрутке */
+.sp-page > .\-mx-6 table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+.sp-page > .\-mx-6 table tr > :first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+.sp-page > .\-mx-6 table thead tr > :first-child {
+  z-index: 4;
+}
+.sp-page .overflow-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 767px) {
+  /* высота календаря = видимая область минус нижнее меню (раньше было 100vh и низ уходил под меню) */
+  .sp-main .sp-page > .\-mx-6 {
+    height: calc(100dvh - 52px - env(safe-area-inset-bottom)) !important;
+  }
+  /* колонка дня: 3 дня помещаются на экране, остальные — свайпом */
+  .sp-main .sp-page > .\-mx-6 table[style*="min-width"] {
+    min-width: 560px !important;
+  }
+}
+
+/* ---------- Прайс-лист ---------- */
+@media (max-width: 767px) {
+  /* строка услуги: название переносится, кнопки действий — на отдельной строке */
+  .sp-main .sp-page .space-y-2 > .flex.items-center.gap-3.px-4.py-3 {
+    flex-wrap: wrap;
+    padding: 10px 12px;
+    row-gap: 4px;
+  }
+  .sp-main .sp-page .space-y-2 > .flex.items-center.gap-3 .truncate {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  .sp-main .sp-page .space-y-2 > .flex.items-center.gap-3 > .flex-1 {
+    flex: 1 1 140px;
+  }
+  .sp-main .sp-page .space-y-2 > .flex.items-center.gap-3 > .flex.gap-1.shrink-0 {
+    margin-left: auto;
+  }
+  /* поиск на всю ширину, категории — горизонтальная лента */
+  .sp-main .sp-page > .space-y-5 > .flex.gap-3.flex-wrap > .input {
+    width: 100%;
+  }
+  .sp-main .sp-page > .space-y-5 > .flex.gap-3.flex-wrap > .flex.gap-1.flex-wrap {
+    flex: 1 1 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+  .sp-main .sp-page > .space-y-5 > .flex.gap-3.flex-wrap > .flex.gap-1.flex-wrap::-webkit-scrollbar {
+    display: none;
+  }
+  .sp-main .sp-page > .space-y-5 > .flex.gap-3.flex-wrap > .flex.gap-1.flex-wrap > button {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Карточка пациента: шапка в две строки ---------- */
+@media (max-width: 767px) {
+  .sp-main .sp-page > .space-y-5 > .flex.items-start.gap-4:has(> .shrink-0.flex-wrap) {
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+  .sp-main .sp-page > .space-y-5 > .flex.items-start.gap-4 > .flex-1 {
+    min-width: 0;
+  }
+  .sp-main .sp-page > .space-y-5 > .flex.items-start.gap-4 > .shrink-0.flex-wrap {
+    flex: 1 1 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .sp-main .sp-page > .space-y-5 > .flex.items-start.gap-4 > .shrink-0.flex-wrap > button {
+    width: 100%;
+  }
+}
+
+/* ---------- Формы: на узких телефонах поля в один столбец ---------- */
+@media (max-width: 479px) {
+  .sp-main .sp-page .grid.grid-cols-2:has(.input),
+  .sp-main .sp-page .grid.grid-cols-2:has(select) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Карта зубов: 4 квадранта по 8 зубов, крупные цели касания ---------- */
+@media (max-width: 599px) {
+  .sp-chart {
+    padding: 12px 8px;
+  }
+  .sp-teeth-row {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px 2px;
+    min-width: 0;
+  }
+  .sp-teeth-row > div {
+    flex: 0 0 calc((100% - 14px) / 8);
+    max-width: none;
+  }
+  .sp-teeth-row > div:nth-child(9) {
+    margin-left: 0;
+  }
+  .sp-teeth-row > div:nth-child(9)::before {
+    display: none;
+  }
+  .sp-teeth-row .text-\[9px\] {
+    font-size: 11px;
+  }
+  /* увеличенная зона касания вокруг каждого зуба */
+  .sp-teeth-row > div {
+    padding: 2px 0;
+  }
+}
+
+/* ---------- Широкие экраны: чуть больше воздуха ---------- */
+@media (min-width: 1280px) {
+  .sp-main .sp-page {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* ---------- Телефон в альбомной ориентации: компактное нижнее меню ---------- */
+@media (max-width: 899px) and (max-height: 500px) and (orientation: landscape) {
+  .sp-aside .sp-nav a {
+    min-height: 44px;
+    flex-direction: row;
+    gap: 6px;
+    justify-content: center;
+  }
+}
+
+/* ---------- Сенсорные устройства: цели касания ≥ 44px ---------- */
+@media (pointer: coarse) {
+  .sp-page .flex.items-center.gap-2 > button.p-1\.5, /* стрелки календаря */
+  .space-y-2 .flex.gap-1.shrink-0 > button {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sp-page .rounded-full[class*="text-xs"] {
+    min-height: 36px;
+  }
+}
+
+/* ---------- Смета: таблица процедур на телефоне ---------- */
+@media (max-width: 767px) {
+  .sp-page .card table.w-full.text-sm th,
+  .sp-page .card table.w-full.text-sm td {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .sp-page .card table.w-full.text-sm td.w-10,
+  .sp-page .card table.w-full.text-sm th.w-10 {
+    width: 36px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* На устройствах без hover (телефон/планшет) кнопки «hover-only» должны быть видны всегда */
+@media (hover: none) {
+  .opacity-0.group-hover\:opacity-100 {
+    opacity: 1;
+  }
+}
